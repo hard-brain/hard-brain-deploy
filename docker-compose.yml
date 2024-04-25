@@ -1,0 +1,55 @@
+services:
+  api:
+    image: hard-brain-api 
+    build:
+      context: ./hard-brain-api
+      dockerfile: Dockerfile
+      args:
+        - PYTHON_REGISTRY=python
+    container_name: api
+    env_file: ./hard-brain-api/.env
+    environment:
+      PORT: 8000
+    ports:
+      - '8000:8000'
+    restart: always
+    networks:
+      - api_network
+
+  bot:
+    image: hard-brain-bot
+    build:
+      context: ./hard-brain-bot
+      dockerfile: Dockerfile
+      args:
+        - PYTHON_REGISTRY=python
+    container_name: bot
+    env_file: ./hard-brain-bot/.env
+    environment:
+      HARD_BRAIN_API_HOSTNAME: "host.docker.internal"
+    networks:
+      - api_network
+
+  db:
+    image: postgres
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    env_file:
+      - ./hard-brain-api/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    networks:
+      - api_network
+
+networks:
+  api_network:
+    driver: "bridge"
+
+volumes:
+  pgdata:
