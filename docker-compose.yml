@@ -24,7 +24,7 @@ services:
         - PYTHON_REGISTRY=python
     env_file: ./hard-brain-bot/.env
     environment:
-      HARD_BRAIN_API_HOSTNAME: "host.docker.internal"
+      HARD_BRAIN_API_HOSTNAME: "172.17.0.1" # host.docker.internal
     networks:
       - api_network
 
