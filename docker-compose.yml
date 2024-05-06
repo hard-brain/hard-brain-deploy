@@ -13,8 +13,6 @@ services:
     ports:
       - '8000:8000'
     restart: always
-    networks:
-      - api_network
 
   bot:
     image: hard-brain-bot
@@ -26,8 +24,6 @@ services:
       - ./discord_token.env
     environment:
       HARD_BRAIN_API_HOSTNAME: "172.17.0.1" # host.docker.internal
-    networks:
-      - api_network
 
   db:
     image: postgres
@@ -46,12 +42,6 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data/
-    networks:
-      - api_network
-
-networks:
-  api_network:
-    driver: "bridge"
 
 volumes:
   pgdata:
