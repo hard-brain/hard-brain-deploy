@@ -4,11 +4,12 @@ services:
     build:
       context: ./hard-brain-api
       dockerfile: Dockerfile
-      args:
-        - PYTHON_REGISTRY=python
-    env_file: ./hard-brain-api/.env
+    env_file: ./postgres_password.env
     environment:
       PORT: 8000
+      PGUSER: "postgres"
+      POSTGRES_DB: "hard-brain-db"
+      DB_HOSTNAME: "db"
     ports:
       - '8000:8000'
     restart: always
@@ -20,9 +21,9 @@ services:
     build:
       context: ./hard-brain-bot
       dockerfile: Dockerfile
-      args:
-        - PYTHON_REGISTRY=python
-    env_file: ./hard-brain-bot/.env
+    env_file:
+      - ./postgres_password.env
+      - ./discord_token.env
     environment:
       HARD_BRAIN_API_HOSTNAME: "172.17.0.1" # host.docker.internal
     networks:
@@ -36,8 +37,11 @@ services:
       interval: 2s
       timeout: 10s
       retries: 10
-    env_file:
-      - ./hard-brain-api/.env
+    env_file: ./postgres_password.env
+    environment:
+      PGUSER: "postgres"
+      POSTGRES_DB: "hard-brain-db"
+      DB_HOSTNAME: "db"
     ports:
       - "5432:5432"
     volumes:

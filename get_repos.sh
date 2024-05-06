@@ -6,7 +6,9 @@ clone_repositories() {
     git clone https://github.com/hard-brain/hard-brain-api.git
     git clone https://github.com/hard-brain/hard-brain-bot.git
 
-    echo "Cloning completed."
+    echo "Creating empty discord_token.env and postgres_password.env"
+    echo "DISCORD_TOKEN=" >> discord_token.env
+    echo "POSTGRES_PASSWORD=" >> postgres_password.env
 }
 
 clone_repositories

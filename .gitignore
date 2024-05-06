@@ -1,3 +1,5 @@
 hard-brain-api/
 hard-brain-bot/
 **/*.env
+**/discord_token.*
+**/postgres_password.*
