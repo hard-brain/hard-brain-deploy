@@ -3,8 +3,8 @@
 initial_setup() {
 	echo "Cloning reposititories..."
 
-    git clone https://github.com/hard-brain/hard-brain-api.git
-    git clone https://github.com/hard-brain/hard-brain-bot.git
+    git clone git@hard-brain-api:hard-brain/hard-brain-api.git
+    git clone git@hard-brain-bot:hard-brain/hard-brain-bot.git
 
     echo "Creating empty discord_token.env and postgres_password.env - please edit as appropriate"
     echo "DISCORD_TOKEN=" >> discord_token.env
