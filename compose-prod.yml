@@ -1,6 +1,6 @@
 services:
   api:
-    image: ghcr.io/hard-brain/hard-brain-api:master
+    image: ghcr.io/hard-brain/hard-brain-api:latest
     env_file: ./postgres_password.env
     environment:
       PORT: 8000
@@ -14,7 +14,7 @@ services:
       - ./songs/:/app/src/resources/songs/
 
   bot:
-    image: ghcr.io/hard-brain/hard-brain-bot:master
+    image: ghcr.io/hard-brain/hard-brain-bot:latest
     env_file:
       - ./postgres_password.env
       - ./discord_token.env
