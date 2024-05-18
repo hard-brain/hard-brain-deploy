@@ -1,9 +1,6 @@
 services:
   api:
-    image: hard-brain-api 
-    build:
-      context: ./hard-brain-api
-      dockerfile: Dockerfile
+    image: ghcr.io/hard-brain/hard-brain-bot:master
     env_file: ./postgres_password.env
     environment:
       PORT: 8000
@@ -13,12 +10,11 @@ services:
     ports:
       - '8000:8000'
     restart: always
+    volumes:
+      - ./songs/:/app/src/resources/songs/
 
   bot:
-    image: hard-brain-bot
-    build:
-      context: ./hard-brain-bot
-      dockerfile: Dockerfile
+    image: ghcr.io/hard-brain/hard-brain-api:master
     env_file:
       - ./postgres_password.env
       - ./discord_token.env
