@@ -4,3 +4,4 @@ hard-brain-bot/
 **/discord_token.*
 **/postgres_password.*
 **/songs/
+pgdata/
